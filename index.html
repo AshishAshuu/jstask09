@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSTask9</title>
+    <style>
+        body {
+            background-color: rgb(152, 27, 85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background-color: rgb(109, 21, 61);
+            padding: 70px;
+            max-width: 700px;
+            border-radius: 5px; 
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        label {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .form-control {
+            padding: 5px;
+            border-radius: 3px;
+            border: none;
+        }
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+        .btn {
+            background-color: #fff;
+            color: rgb(109, 21, 61);
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="registrationForm" novalidate>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" required>
+                <span id="nameError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" required>
+                <span id="emailError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" class="form-control" id="phone" required>
+                <span id="phoneError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <div>
+                    <input type="radio" name="gender" value="m" id="male">
+                    <label for="male">Male</label>
+                </div>
+                <div>
+                    <input type="radio" name="gender" value="f" id="female">
+                    <label for="female">Female</label>
+                </div>
+                <div>
+                    <input type="radio" name="gender" value="o" id="other">
+                    <label for="other">Other</label>
+                </div>
+                <span id="genderError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <select name="lang" id="lang" class="form-control">
+                    <option value="" selected disabled>Select Language</option>
+                    <option value="telugu">Telugu</option>
+                    <option value="english">English</option>
+                    <option value="kannada">kannada</option>
+                    <option value="hindi">Hindi</option>
+                    <option value="tamil">Tamil</option>
+                </select>
+                <span id="languageError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="zipcode">Zip Code:</label>
+                <input type="text" class="form-control" id="zipcode" required>
+                <span id="zipcodeError" class="error-message"></span>
+            </div>
+            <div class="form-group">
+                <label for="about">About:</label>
+                <textarea class="form-control" id="about" rows="3"></textarea>
+                <span id="aboutError" class="error-message"></span>
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            validateForm();
+        });
+
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var gender = document.querySelector("input[name='gender']:checked");
+            var language = document.getElementById("lang").value;
+            var zipcode = document.getElementById("zipcode").value;
+            var about = document.getElementById("about").value;
+
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("phoneError").textContent = "";
+            document.getElementById("genderError").textContent = "";
+            document.getElementById("languageError").textContent = "";
+            document.getElementById("zipcodeError").textContent = "";
+            document.getElementById("aboutError").textContent = "";
+
+            let flag = true;
+
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Please enter your name";
+                flag = false;
+            }
+
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Please enter your email";
+                flag = false;
+            }
+
+            if (phone === "") {
+                document.getElementById("phoneError").textContent = "Please enter your phone number";
+                flag = false;
+            }
+
+            if (!gender) {
+                document.getElementById("genderError").textContent = "Please select your gender";
+                flag = false;
+            }
+
+            if (language === "") {
+                document.getElementById("languageError").textContent = "Please enter your language";
+                flag = false;
+            }
+
+            if (zipcode === "") {
+                document.getElementById("zipcodeError").textContent = "Please enter your zip code";
+                flag = false;
+            }
+
+            if (about === "") {
+                document.getElementById("aboutError").textContent = "Please provide some information about yourself";
+                flag = false;
+            }
+
+            if (!flag) return;
+
+            alert("Registration successful!");
+            document.getElementById("registrationForm").reset();
+        }
+    </script>
+</body>
+
+</html>
